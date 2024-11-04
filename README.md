@@ -14,4 +14,4 @@ Time pressure: A 15-Minute Timer adds urgency to the gameplay.
 
 ## Technologies used:
 
-Python, VS Code, Gradio, Llama-index, OpenAI API 
+Python, Visual Studio Code, Gradio, Llama-index, OpenAI API 
