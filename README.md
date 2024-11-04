@@ -1,4 +1,4 @@
-# Detective Chatbot - Group 03
+# Detective Chatbot - Group 02
 
 ## What is it?
 
