@@ -49,8 +49,9 @@ def main():
         value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
         type="messages",
         show_label=False,
-        avatar_images=("./avatar_images/human.png", "./avatar_images/detective.png"),
+        avatar_images=("./avatar_images/suspect.png", "./avatar_images/detective2.png"),
         elem_id="CHATBOT"
+
     )
 
     
@@ -63,7 +64,10 @@ def main():
 )
 
 
-    chatinterface.launch(inbrowser=True)
+    chatinterface.launch(
+        inbrowser=True
+
+)
 
 
 if __name__ == "__main__":
