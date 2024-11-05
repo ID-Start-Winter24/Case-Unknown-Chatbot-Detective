@@ -1,16 +1,25 @@
 #component-4 {
-    background: #092a8f !important;
+    background: #ecebeb !important;
 }
 
 .message.bot {
-    background: #108bad !important;
-    font-family: "Lucida Handwriting" !important;
+    background: #bdbbbb !important;
+    font-family: "Monaco" !important;
+    color: #fcfcfc !important;
 }
 
 .message.user {
-    background: #ad0ea8 !important;
+    background: #fcfcfc !important;
+    font-family: "Monaco";
 }
 
 #CHATBOT {
-    background: #092a8f !important;
+    background: #f9f9f8 !important;
+}
+
+#CHATBOT .gr-chatbot-avatar img {
+    width: 50px; /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
+    border-radius: 50%; /* Optional: to make avatars circular */
+    object-fit: cover; /* Ensure the image fills the container properly */
 }

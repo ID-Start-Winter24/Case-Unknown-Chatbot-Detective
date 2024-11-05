@@ -26,7 +26,7 @@ template = (
     "---------------------\n"
     "{context_str}"
     "\n---------------------\n"
-    "Given only this information and without using ur general knowledge, please answer the question in the style of Shakespeare and always answer in german: {query_str}\n"
+    "Given only this information and without using ur general knowledge, please answer the question in the style of an aggressive detective and always answer in english. Guide the player through the story. Maximum 5 sentences answers. : {query_str}\n"
 )
 qa_template = PromptTemplate(template)
 query_engine = index.as_query_engine(streaming=True, text_qa_template=qa_template)
@@ -46,20 +46,22 @@ theme = CustomTheme()
 
 def main():
     chatbot = gr.Chatbot(
-        value=[{"role": "assistant", "content": "How can I help you today?"}],
+        value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
         type="messages",
         show_label=False,
-        avatar_images=("./avatar_images/human.png", "./avatar_images/robot.png"),
+        avatar_images=("./avatar_images/human.png", "./avatar_images/detective.png"),
         elem_id="CHATBOT"
     )
 
+    
     chatinterface = gr.ChatInterface(
-        fn=response,
-        chatbot=chatbot,
-        type="messages",
-        theme=theme,
-        css_paths="./style.css"
-    )
+    fn=response,
+    chatbot=chatbot,
+    type="messages",
+    theme=theme,
+    css_paths="./style.css"  # Path to your custom CSS
+)
+
 
     chatinterface.launch(inbrowser=True)
 
