@@ -6,9 +6,12 @@
     background: #bdbbbb !important;
     font-family: "Monaco" !important;
     color: #fcfcfc !important;
-    border: none !important;
-    outline: none !important;
+    
 }
+
+.avatar-container img {
+    padding: 0 !important;
+    }
 
 .message.user {
     background: #fcfcfc !important;
