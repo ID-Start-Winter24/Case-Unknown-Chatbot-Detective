@@ -1,6 +1,7 @@
 import os
 import time
 import gradio as gr
+import base64
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage, PromptTemplate
 from llama_index.llms.openai import OpenAI
 from llama_index.core import Settings
@@ -61,6 +62,19 @@ def response(message, history):
 theme = CustomTheme()
 
 def main():
+    with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+
+    # Create dynamic CSS for the background
+    custom_css = f"""
+    .gradio-container {{
+        background: url("data:image/png;base64,{encoded_string}") !important;
+        background-size: cover !important;
+        background-position: center !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }}
+    """
     chatbot = gr.Chatbot(
         value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
         type="messages",
@@ -76,6 +90,7 @@ def main():
     chatbot=chatbot,
     type="messages",
     theme=theme,
+    css=custom_css,
     css_paths="./style.css"  # Path to your custom CSS
 )
 
@@ -84,6 +99,9 @@ def main():
         inbrowser=True
 
 )
+
+
+
 
 
 if __name__ == "__main__":
