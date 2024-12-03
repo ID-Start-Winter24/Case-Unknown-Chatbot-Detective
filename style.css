@@ -1,6 +1,4 @@
-#component-4 {
-    background: #ecebeb !important;
-}
+
 
 .message.bot {
     background: #bdbbbb !important;
@@ -9,9 +7,6 @@
     
 }
 
-.avatar-container img {
-    padding: 0 !important;
-    }
 
 .message.user {
     background: #fcfcfc !important;
@@ -19,15 +14,28 @@
     outline: none !important;
 }
 
+
 #CHATBOT {
     background: #f9f9f8 !important;
+    width: 30%;
+    max-width: 500px;  /* Ограничиваем максимальную ширину */
+    margin-left: 70%;
+    margin-top: 5%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
-/* For avatar images */
-#CHATBOT 
-.gr-chatbot-avatar img {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
+
+
+#USER_INPUT {
+    width: 30%;  /* Ширина поля ввода на всю доступную ширину */
+    margin-top: 2%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 }
+
 
