@@ -18,7 +18,7 @@
 #CHATBOT {
     background: #f9f9f8 !important;
     width: 30%;
-    max-width: 500px;  /* Ограничиваем максимальную ширину */
+    max-width: 500px;  
     margin-left: 70%;
     margin-top: 5%;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);

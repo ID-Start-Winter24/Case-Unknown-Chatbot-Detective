@@ -84,7 +84,7 @@ def main():
     )
     input_box = gr.Textbox(
         label="Type a message...",
-        elem_id="USER_INPUT"  # Связь с CSS-идентификатором
+        elem_id="USER_INPUT"  # a key to CSS-part
     )
 
     
