@@ -1,9 +1,12 @@
 import os
 import time
 import gradio as gr
+import base64
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage, PromptTemplate
 from llama_index.llms.openai import OpenAI
 from llama_index.core import Settings
+from llama_index.core.llms import ChatMessage, MessageRole
+from llama_index.core.chat_engine.types import ChatMode
 
 from theme import CustomTheme
 
@@ -21,6 +24,7 @@ else:
     storage_context = StorageContext.from_defaults(persist_dir=path_persist)
     index = load_index_from_storage(storage_context)
 
+
 template = (
     "We have provided context information below. \n"
     "---------------------\n"
@@ -32,8 +36,21 @@ qa_template = PromptTemplate(template)
 query_engine = index.as_query_engine(streaming=True, text_qa_template=qa_template)
 
 
+chat_engine = index.as_chat_engine(
+ chat_mode=ChatMode.CONDENSE_PLUS_CONTEXT,
+ system_prompt=template,
+ streaming=True,
+)
+
 def response(message, history):
-    streaming_response = query_engine.query(message)
+    chat_history = []
+    for i, msg in enumerate(history):
+        if i % 2 == 0:
+            history_message = ChatMessage(role=MessageRole.ASSISTANT, content=msg["content"])
+        else:
+            history_message = ChatMessage(role=MessageRole.USER, content=msg["content"])
+        chat_history.append(history_message)
+    streaming_response = chat_engine.stream_chat(message, chat_history=chat_history)
 
     answer = ""
     for text in streaming_response.response_gen:
@@ -45,12 +62,19 @@ def response(message, history):
 theme = CustomTheme()
 
 def main():
+    with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+
     chatbot = gr.Chatbot(
         value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
         type="messages",
         show_label=False,
-        avatar_images=("./avatar_images/human.png", "./avatar_images/detective.png"),
         elem_id="CHATBOT"
+
+    )
+    input_box = gr.Textbox(
+        label="Type a message...",
+        elem_id="USER_INPUT"  # a key to CSS-part
     )
 
     
@@ -59,11 +83,14 @@ def main():
     chatbot=chatbot,
     type="messages",
     theme=theme,
-    css_paths="./style.css"  # Path to your custom CSS
-)
-
-
+    #css_paths="./style.css"  # Path to your custom CSS
+    )
+    
     chatinterface.launch(inbrowser=True)
+
+
+
+
 
 
 if __name__ == "__main__":

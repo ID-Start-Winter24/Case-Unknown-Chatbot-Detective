@@ -2,7 +2,7 @@
 
 ## What is it?
 
-This is a text-based detective game where you, the player, are accused of a crime. Your goal is to clear your name by interrogating a detective chatbot. By asking the right questions, you can uncover clues and piece together the events to discover the truth.
+This is a text-based detective game where you, the player, are accused of a crime. Your goal is to clear your name by answering the questions of a detective chatbot. Not remembering what really happened last night your goal is to clear your name by coming up with a story of events of last night that checks out and is believable based on provided memory fragments - whilst the detective's objective is to judge wether your story is believable and decide on whether he'll send you to jail.
 
 ## Features:
 
