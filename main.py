@@ -65,16 +65,6 @@ def main():
     with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
 
-    # Create dynamic CSS for the background
-    custom_css = f"""
-    .gradio-container {{
-        background: url("data:image/png;base64,{encoded_string}") !important;
-        background-size: cover !important;
-        background-position: center !important;
-        max-width: 100% !important;
-        height: auto !important;
-    }}
-    """
     chatbot = gr.Chatbot(
         value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
         type="messages",
@@ -93,40 +83,11 @@ def main():
     chatbot=chatbot,
     type="messages",
     theme=theme,
-    css=custom_css,
-    css_paths="./style.css"  # Path to your custom CSS
+    #css_paths="./style.css"  # Path to your custom CSS
     )
     
-    custom_css = f"""
-        .gradio-container {{
-            background: url("data:image/png;base64,{encoded_string}") !important;
-            background-size: cover !important;
-            background-position: center !important;
-            max-width: 30% !important;
-            height: auto !important;
-        }}
-        #CHATBOT {{
-            width: 30%;
-            margin-left: 70%;
-            margin-top: 10%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-        }}
-        #component-4 {{
-            background: #ecebeb !important;
-            width: 30% !important;
-            margin-left: 70% !important;
-            margin-top: 10% !important;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2) !important;
-            border-radius: 8px !important;
-        }}
-    """
+    chatinterface.launch(inbrowser=True)
 
-
-    chatinterface.launch(
-        inbrowser=True
-
-)
 
 
 
