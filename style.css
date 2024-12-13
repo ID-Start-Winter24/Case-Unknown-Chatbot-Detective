@@ -32,14 +32,8 @@
     flex-direction: column;
 }
 
-/*/ Moved from main.py 
-.gradio-container {
-    background: url("data:image/png;base64,encoded_string") !important;
-    background-size: cover !important;
-    background-position: center !important;
-    max-width: 30% !important;
-    height: auto !important;
-}/*/
+
+}/*
 #component-4 {
     background: #ecebeb !important;
     width: 30% !important;
@@ -49,3 +43,7 @@
     border-radius: 8px !important;
 }
 */
+footer {
+    display: none !important;
+}
+  

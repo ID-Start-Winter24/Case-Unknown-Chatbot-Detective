@@ -11,6 +11,7 @@ from llama_index.core.chat_engine.types import ChatMode
 from theme import CustomTheme
 
 
+    
 path_modulhandbuch = "./dokumente"
 path_persist = os.path.join(path_modulhandbuch, "persist")
 
@@ -30,19 +31,26 @@ template = (
     "---------------------\n"
     "{context_str}"
     "\n---------------------\n"
-    "Given only this information and without using ur general knowledge, please answer the question in the style of an aggressive detective and always answer in english. Guide the player through the story. Maximum 5 sentences answers. : {query_str}\n"
+    "Given only this information and without using your general knowledge, "
+    "please answer the question in the style of an aggressive detective and always answer in English. "
+    "Guide the player through the story. Maximum 5 sentences answers: {query_str}\n"
 )
 qa_template = PromptTemplate(template)
 query_engine = index.as_query_engine(streaming=True, text_qa_template=qa_template)
 
 
 chat_engine = index.as_chat_engine(
- chat_mode=ChatMode.CONDENSE_PLUS_CONTEXT,
- system_prompt=template,
- streaming=True,
+    chat_mode=ChatMode.CONDENSE_PLUS_CONTEXT,
+    system_prompt=template,
+    streaming=True,
 )
 
-def response(message, history):
+def visible():
+    ta = gr.TextArea(value="TEXTAREA", visible=True)
+    return ta
+
+
+def response(history):
     chat_history = []
     for i, msg in enumerate(history):
         if i % 2 == 0:
@@ -50,48 +58,63 @@ def response(message, history):
         else:
             history_message = ChatMessage(role=MessageRole.USER, content=msg["content"])
         chat_history.append(history_message)
+    
+    # Streaming der Antwort mit der Chat-Engine
+    message = history[-1]["content"]
     streaming_response = chat_engine.stream_chat(message, chat_history=chat_history)
-
-    answer = ""
+    history.append({"role": "assistant", "content": ""})
     for text in streaming_response.response_gen:
+    #    # Verzögerung von 50 ms pro Antwortteil, um das Streaming zu simulieren
         time.sleep(0.05)
-        answer += text
-        yield answer
+        history[-1]["content"] += text
+        yield history  # Gibt die Antwort in Teilen zurück
+
+def user(message, history):
+    return "", history + [{"role": "user", "content": message}]
 
 
-theme = CustomTheme()
+
 
 def main():
     with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
 
-    chatbot = gr.Chatbot(
-        value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
-        type="messages",
-        show_label=False,
-        elem_id="CHATBOT"
 
-    )
-    input_box = gr.Textbox(
-        label="Type a message...",
-        elem_id="USER_INPUT"  # a key to CSS-part
-    )
+    theme = CustomTheme()
 
-    
-    chatinterface = gr.ChatInterface(
-    fn=response,
-    chatbot=chatbot,
-    type="messages",
-    theme=theme,
-    #css_paths="./style.css"  # Path to your custom CSS
-    )
-    
-    chatinterface.launch(inbrowser=True)
+    # Dynamic CSS for background
+    custom_css = f"""
+    .gradio-container {{
+        background: url("data:image/png;base64,{encoded_string}") !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }}
+    """
 
-
-
-
-
+    # Layout
+    with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme) as chatinterface:
+        with gr.Row():  # No equal_width argument
+            with gr.Column():
+                ta = gr.TextArea(value="TEXTAREA", visible=False)  # First empty column
+            gr.Column()  # Second empty column
+            with gr.Column():  # Third column for chatbot and input box
+                chatbot = gr.Chatbot(
+                    value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
+                    type="messages",
+                    show_label=False,
+                    elem_id="CHATBOT",
+                    min_height=800
+                )
+                input_box = gr.Textbox(
+                    show_label= False,
+                    elem_id="USER_INPUT",
+                    placeholder="Type your message here...",
+                    interactive=True,
+                    submit_btn=True
+                )
+                input_box.submit(user, inputs=[input_box, chatbot], outputs=[input_box,chatbot]).then(response, inputs=[chatbot], outputs=[chatbot]).then(visible, outputs=ta)
+    chatinterface.launch(inbrowser=True,show_api=False)
 
 if __name__ == "__main__":
     main()
+
