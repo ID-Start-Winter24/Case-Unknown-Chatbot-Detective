@@ -159,7 +159,7 @@ def main():
                     )
                 scale = gr.Textbox(lines=1, value="scale", show_label=False, container=False)
                 picture_of_detectiv = gr.Image(
-                    value="avatar_images/detective.jpeg", 
+                    value="avatar_images/Detective_animated.gif", 
                     show_label=False, 
                     show_download_button=False, 
                     show_fullscreen_button=False,
