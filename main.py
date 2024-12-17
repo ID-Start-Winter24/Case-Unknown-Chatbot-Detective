@@ -7,6 +7,7 @@ from llama_index.llms.openai import OpenAI
 from llama_index.core import Settings
 from llama_index.core.llms import ChatMessage, MessageRole
 from llama_index.core.chat_engine.types import ChatMode
+import random
 
 from theme import CustomTheme
 
@@ -45,9 +46,9 @@ chat_engine = index.as_chat_engine(
     streaming=True,
 )
 
-def visible():
-    ta = gr.TextArea(value="TEXTAREA", visible=True)
-    return ta
+#def visible():
+#    ta = gr.TextArea(value="TEXTAREA", visible=True)
+#    return ta
 
 
 def response(history):
@@ -73,6 +74,29 @@ def user(message, history):
     return "", history + [{"role": "user", "content": message}]
 
 
+is_visible_up = None
+is_visible_mid = None
+is_visible_down = None
+def show_hint(history):
+    global is_visible_up
+    global is_visible_mid
+    global is_visible_down
+    if len(history) == 3:
+        hint_index = random.randint(1, 4)
+        is_visible_up = f"./hint_pics/hint_{hint_index}.jpg"
+    elif len(history) == 5:
+        hint_index = random.randint(4, 7)
+        is_visible_mid = f"./hint_pics/hint_{hint_index}.jpg"    
+    elif len(history) == 7:
+        hint_index = random.randint(7, 10)
+        is_visible_down = f"./hint_pics/hint_{hint_index}.jpg"
+    
+    up_image = gr.Image(value=is_visible_up, elem_classes="fixed-image-up", show_label= False, show_download_button= False, visible=False if not is_visible_up else True)
+    mid_image = gr.Image(value=is_visible_mid, elem_classes="fixed-image-mid", show_label= False, show_download_button= False, visible=False if not is_visible_mid else True)
+    down_image = gr.Image(value=is_visible_down, elem_classes="fixed-image-down", show_label= False, show_download_button= False, visible=False if not is_visible_down else True)
+    
+    return up_image, mid_image, down_image
+
 
 
 def main():
@@ -96,6 +120,12 @@ def main():
         with gr.Row():  # No equal_width argument
             with gr.Column():
                 ta = gr.TextArea(value="TEXTAREA", visible=False)  # First empty column
+                with gr.Row(elem_classes="white-box", visible=True):
+                    gr.Markdown("## Here are your tips:", elem_classes="heading"),
+                    up_image = gr.Image(value="./hint_pics/hint_3.jpg", elem_classes="fixed-image-up", show_label= False, show_download_button= False, visible=False)
+                    mid_image = gr.Image(value="./hint_pics/hint_6.jpg", elem_classes="fixed-image-mid", show_label= False, show_download_button= False, visible=False)
+                    down_image = gr.Image(value="./hint_pics/hint_7.jpg", elem_classes="fixed-image-down", show_label= False, show_download_button= False, visible=False)
+                   
             gr.Column()  # Second empty column
             with gr.Column():  # Third column for chatbot and input box
                 chatbot = gr.Chatbot(
@@ -103,7 +133,7 @@ def main():
                     type="messages",
                     show_label=False,
                     elem_id="CHATBOT",
-                    min_height=800
+                    min_height=760
                 )
                 input_box = gr.Textbox(
                     show_label= False,
@@ -112,9 +142,10 @@ def main():
                     interactive=True,
                     submit_btn=True
                 )
-                input_box.submit(user, inputs=[input_box, chatbot], outputs=[input_box,chatbot]).then(response, inputs=[chatbot], outputs=[chatbot]).then(visible, outputs=ta)
+
+                input_box.submit(user, inputs=[input_box, chatbot], outputs=[input_box,chatbot]).then(response, inputs=[chatbot], outputs=[chatbot]).then(show_hint, chatbot, [up_image, mid_image, down_image])
     chatinterface.launch(inbrowser=True,show_api=False)
+
 
 if __name__ == "__main__":
     main()
-
