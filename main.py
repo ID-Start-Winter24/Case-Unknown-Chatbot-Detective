@@ -2,29 +2,31 @@ import os
 import time
 import gradio as gr
 import base64
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage, PromptTemplate
-from llama_index.llms.openai import OpenAI
-from llama_index.core import Settings
-from llama_index.core.llms import ChatMessage, MessageRole
-from llama_index.core.chat_engine.types import ChatMode
-
+#from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage, PromptTemplate
+#from llama_index.llms.openai import OpenAI
+#from llama_index.core import Settings
+#from llama_index.core.llms import ChatMessage, MessageRole
+#from llama_index.core.chat_engine.types import ChatMode
+from openai import OpenAI
 from theme import CustomTheme
-
+import Blackwell
+#from openai import OpenAI
+client = OpenAI()
 
     
 path_modulhandbuch = "./dokumente"
 path_persist = os.path.join(path_modulhandbuch, "persist")
-
+"""
 Settings.llm = OpenAI(temperature=0.1, model="gpt-4o-mini")
 
-if not os.path.exists(path_persist):
+    if not os.path.exists(path_persist):
     documents = SimpleDirectoryReader(path_modulhandbuch).load_data()
     index = VectorStoreIndex.from_documents(documents)
     index.storage_context.persist(persist_dir=path_persist)
 else:
     storage_context = StorageContext.from_defaults(persist_dir=path_persist)
     index = load_index_from_storage(storage_context)
-
+"""
 
 template = (
     "We have provided context information below. \n"
@@ -35,6 +37,7 @@ template = (
     "please answer the question in the style of an aggressive detective and always answer in English. "
     "Guide the player through the story. Maximum 5 sentences answers: {query_str}\n"
 )
+"""""
 qa_template = PromptTemplate(template)
 query_engine = index.as_query_engine(streaming=True, text_qa_template=qa_template)
 
@@ -44,6 +47,11 @@ chat_engine = index.as_chat_engine(
     system_prompt=template,
     streaming=True,
 )
+"""
+qa_template = {"template": template}
+
+
+
 
 def visible():
     ta = gr.TextArea(value="TEXTAREA", visible=True)
@@ -54,17 +62,32 @@ def response(history):
     chat_history = []
     for i, msg in enumerate(history):
         if i % 2 == 0:
-            history_message = ChatMessage(role=MessageRole.ASSISTANT, content=msg["content"])
+            history_message = {"role": "assistant", "content": msg["content"]}
         else:
-            history_message = ChatMessage(role=MessageRole.USER, content=msg["content"])
+            history_message = {"role": "user", "content": msg["content"]}
         chat_history.append(history_message)
-    
+        
     # Streaming der Antwort mit der Chat-Engine
     message = history[-1]["content"]
-    streaming_response = chat_engine.stream_chat(message, chat_history=chat_history)
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        stream=True,
+        messages=[
+        
+            {   "role": "system", 
+                "content": Blackwell.SystemPrompt},
+            {   "role": "user",
+                "content": message}
+        ]
+   
+        )
+    #streaming_response = chat_engine.stream_chat(message, chat_history=chat_history)
     history.append({"role": "assistant", "content": ""})
-    for text in streaming_response.response_gen:
-    #    # Verzögerung von 50 ms pro Antwortteil, um das Streaming zu simulieren
+    for chunk in completion:
+        text = ""
+        if chunk.choices and chunk.choices[0].delta.content:
+            text = chunk.choices[0].delta.content
+#    # Verzögerung von 50 ms pro Antwortteil, um das Streaming zu simulieren
         time.sleep(0.05)
         history[-1]["content"] += text
         yield history  # Gibt die Antwort in Teilen zurück
@@ -92,7 +115,7 @@ def main():
     """
 
     # Layout
-    with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme) as chatinterface:
+    with gr.Blocks(css=custom_css, theme=theme) as chatinterface:
         with gr.Row():  # No equal_width argument
             with gr.Column():
                 ta = gr.TextArea(value="TEXTAREA", visible=False)  # First empty column
@@ -116,5 +139,4 @@ def main():
     chatinterface.launch(inbrowser=True,show_api=False)
 
 if __name__ == "__main__":
-    main()
-
+    main()    
