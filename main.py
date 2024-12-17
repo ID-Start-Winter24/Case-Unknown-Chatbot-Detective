@@ -54,8 +54,8 @@ qa_template = {"template": template}
 
 
 def visible():
-    ta = gr.TextArea(value="TEXTAREA", visible=True)
-    return ta
+    text_area = gr.TextArea(value="TEXTAREA", visible=True)
+    return text_area
 
 
 def response(history):
@@ -96,8 +96,6 @@ def user(message, history):
     return "", history + [{"role": "user", "content": message}]
 
 
-
-
 def main():
     with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
@@ -115,18 +113,36 @@ def main():
     """
 
     # Layout
-    with gr.Blocks(css=custom_css, theme=theme) as chatinterface:
-        with gr.Row():  # No equal_width argument
-            with gr.Column():
-                ta = gr.TextArea(value="TEXTAREA", visible=False)  # First empty column
-            gr.Column()  # Second empty column
+    with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme, fill_height=True) as chatinterface:
+        with gr.Row(equal_height=True):  # No equal_width argument
+            with gr.Column(): # First column for hints
+                text_area = gr.TextArea(value="TEXTAREA", visible=False)  # First empty column
+
+            with gr.Column():  # Second column for picture of detectiv, timer and scale
+                timer = gr.Textbox(
+                    lines=1, 
+                    value=" messages left",
+                    show_label=False,
+                    container=False
+                    )
+                scale = gr.Textbox(lines=1, value="scale", show_label=False, container=False)
+                picture_of_detectiv = gr.Image(
+                    value="avatar_images/detective.jpeg", 
+                    show_label=False, 
+                    show_download_button=False, 
+                    show_fullscreen_button=False,
+                    height="38vw",
+                    container=False
+                    )
+
+
             with gr.Column():  # Third column for chatbot and input box
                 chatbot = gr.Chatbot(
                     value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
                     type="messages",
                     show_label=False,
                     elem_id="CHATBOT",
-                    min_height=800
+                    height="42vw"
                 )
                 input_box = gr.Textbox(
                     show_label= False,
@@ -135,7 +151,7 @@ def main():
                     interactive=True,
                     submit_btn=True
                 )
-                input_box.submit(user, inputs=[input_box, chatbot], outputs=[input_box,chatbot]).then(response, inputs=[chatbot], outputs=[chatbot]).then(visible, outputs=ta)
+                input_box.submit(user, inputs=[input_box, chatbot], outputs=[input_box,chatbot]).then(response, inputs=[chatbot], outputs=[chatbot])
     chatinterface.launch(inbrowser=True,show_api=False)
 
 if __name__ == "__main__":
