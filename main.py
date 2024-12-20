@@ -132,8 +132,11 @@ def change_detective_picture(history):
     
 
 def main():
-    with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
+    with open("./avatar_images/background_b2.png", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
+
+    with open("./startpage/mouse_o.png", "rb") as image_file:
+        encoded_mouse_o = base64.b64encode(image_file.read()).decode()
 
 
     theme = CustomTheme()
@@ -144,6 +147,9 @@ def main():
         background: url("data:image/png;base64,{encoded_string}") !important;
         background-size: cover !important;
         background-position: center !important;
+    }}
+    body {{
+    cursor: url('data:image/png;base64,{encoded_mouse_o}') 32 52, auto !important;
     }}
     """
 
