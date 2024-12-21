@@ -148,7 +148,7 @@ def main():
         background-size: cover !important;
         background-position: center !important;
     }}
-    body {{
+    body, img {{
     cursor: url('data:image/png;base64,{encoded_mouse_o}') 32 52, auto !important;
     }}
     """
