@@ -52,6 +52,8 @@ footer {
     display: none !important;
 }
   
+
+
 .white-box {
     background-color: white;
     border-radius: 10px;
@@ -62,7 +64,7 @@ footer {
 
 .fixed-image-up {
     position: absolute;
-    top: 120px; /* Adjust the top position */
+    top: 100px; /* Adjust the top position */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Center horizontally relative to itself */
     z-index: 10; /* Ensure it stays above other elements */
@@ -73,7 +75,7 @@ footer {
 
 .fixed-image-mid {
     position: absolute;
-    top: 350px; /* Adjust the top position */
+    top: 270px; /* Adjust the top position */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Center horizontally relative to itself */
     z-index: 10; /* Ensure it stays above other elements */
@@ -84,7 +86,7 @@ footer {
 
 .fixed-image-down {
     position: absolute;
-    top: 580px; /* Adjust the top position */
+    top: 440px; /* Adjust the top position */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Center horizontally relative to itself */
     z-index: 10; /* Ensure it stays above other elements */
