@@ -123,7 +123,7 @@ def show_hint(history):
 
 
 def main():
-    with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
+    with open("./avatar_images/background_intergorationroom.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
 
 
@@ -143,7 +143,8 @@ def main():
     with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme, fill_height=True) as chatinterface:
         with gr.Row(equal_height=True):  # No equal_width argument
             with gr.Column(): # First column for hints
-                text_area = gr.TextArea(value="TEXTAREA", visible=False)  # First empty column
+                with gr.Row(elem_classes="logo-box", visible=True):
+                    logo = gr.Image(value="./avatar_images/logo.png", elem_classes="logo", show_label= False, show_download_button= False)
                 with gr.Row(elem_classes="white-box", visible=True):
                     gr.Markdown("## Here are your tips:", elem_classes="heading"),
                     up_image = gr.Image(value="./hint_pics/hint_3.jpg", elem_classes="fixed-image-up", show_label= False, show_download_button= False, visible=False)
@@ -152,19 +153,19 @@ def main():
                    
             with gr.Column():  # Second column for picture of detectiv, timer and scale
                 timer = gr.Textbox(
-                    lines=1, 
                     value=" messages left",
                     show_label=False,
-                    container=False
+                    container=False,
+                    elem_classes="timer"
                     )
-                scale = gr.Textbox(lines=1, value="scale", show_label=False, container=False)
+                scale = gr.Textbox(value="scale", show_label=False, container=False, elem_classes="scale")
                 picture_of_detectiv = gr.Image(
                     value="avatar_images/Detective_animated.gif", 
                     show_label=False, 
                     show_download_button=False, 
                     show_fullscreen_button=False,
                     height="38vw",
-                    container=False
+                    container=False,
                     )
 
 

@@ -54,10 +54,10 @@ footer {
   
 .white-box {
     background-color: white;
-    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 825px;
+    height: "42vw";
+    border-radius: 0px !important;
 }
 
 .fixed-image-up {
@@ -68,6 +68,7 @@ footer {
     z-index: 10; /* Ensure it stays above other elements */
     width: 100px; /* Set the desired width */
     height: auto; /* Maintain aspect ratio */
+    border-radius: 0px !important;
 }
 
 .fixed-image-mid {
@@ -78,6 +79,7 @@ footer {
     z-index: 10; /* Ensure it stays above other elements */
     width: 100px; /* Set the desired width */
     height: auto; /* Maintain aspect ratio */
+    border-radius: 0px !important;
 }
 
 .fixed-image-down {
@@ -88,6 +90,7 @@ footer {
     z-index: 10; /* Ensure it stays above other elements */
     width: 100px; /* Set the desired width */
     height: auto; /* Maintain aspect ratio */
+    border-radius: 0px !important;
 }
 
 .heading {
@@ -103,6 +106,7 @@ footer {
     font-size: 12px; /* Adjust font size as needed */
     color: #333; /* Text color for readability */
     line-height: 1.5; /* Adjust line spacing for clarity */
+    border-radius: 0px !important;
 }
 
 /* Apply the Jersey 20 font to the input box */
@@ -111,6 +115,7 @@ footer {
     font-size: 12px;
     color: #333; /* Input text color */
     background-color: #f9f9f8; /* Optional background color for better UX */
+    border-radius: 0px !important;
 }
 .heading {
     font-family: 'Jersey 20', monospace; /* Use Roboto font */
@@ -118,4 +123,20 @@ footer {
     color: #333; /* Adjust color as needed */
     margin: 10px 0; /* Optional spacing */
     text-align: center; /* Optional alignment */
+}
+.scale {
+    border-radius: 0px !important;
+}
+
+.timer{
+    border-radius: 0px !important;
+}
+.logo{
+    width: 100px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0px !important;
+
+}
+.logo-box{
+    height: "12vw"
 }
