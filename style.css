@@ -43,6 +43,7 @@
     border-radius: 8px !important;
 }
 */
+
 @font-face {
     font-family: 'Jersey 20';
     src: url('./fonts/Jersey20.ttf') format('truetype');
@@ -56,9 +57,8 @@ footer {
 
 .white-box {
     background-color: white;
-    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: "42vw";
+    height: "36vw";
     border-radius: 0px !important;
 }
 
@@ -123,7 +123,7 @@ footer {
     font-family: 'Jersey 20', monospace; /* Use Roboto font */
     font-size: 20px; /* Adjust font size */
     color: #333; /* Adjust color as needed */
-    margin: 10px 0; /* Optional spacing */
+    margin-top: 20px; /* Optional spacing */
     text-align: center; /* Optional alignment */
 }
 .scale {
@@ -134,11 +134,11 @@ footer {
     border-radius: 0px !important;
 }
 .logo{
-    width: 100px; /* Set the desired width */
-    height: auto; /* Maintain aspect ratio */
+    width: 110% !important; /* Set the desired width */
+    height: 110%; /* Maintain aspect ratio */
     border-radius: 0px !important;
 
 }
 .logo-box{
-    height: "12vw"
+    height: "6vw"
 }

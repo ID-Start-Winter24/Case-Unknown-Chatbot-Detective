@@ -95,8 +95,11 @@ def response(history):
 
 def user(message, history):
     global message_counter
-    message_counter -= 1
-    return "", history + [{"role": "user", "content": message}], f"{message_counter} messages left"
+    if message_counter > 0:
+        message_counter -= 1
+        return "", history + [{"role": "user", "content": message}], f"{message_counter} messages left"
+    else:
+        return "", history + [{"role": "user", "content": message}], f"game over"
 
         
 is_visible_up = None
@@ -132,7 +135,7 @@ def change_detective_picture(history):
     
 
 def main():
-    with open("./avatar_images/background_intergorationroom.png", "rb") as image_file:
+    with open("./avatar_images/background_b2_wide.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
 
     with open("./startpage/mouse_o.png", "rb") as image_file:
@@ -157,9 +160,9 @@ def main():
     with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme, fill_height=True) as chatinterface:
         with gr.Row(equal_height=True):  # Equal_width argument
             with gr.Column(): # First column for hints
-                with gr.Row(elem_classes="logo-box", visible=True):
-                    logo = gr.Image(value="./avatar_images/logo.png", elem_classes="logo", show_label= False, show_download_button= False)
-                with gr.Row(elem_classes="white-box", visible=True):
+                with gr.Row(elem_classes="logo-box", visible=True, max_height="6.5vw"):
+                    logo = gr.Image(value="./avatar_images/logo.png", elem_classes="logo", show_label= False, show_download_button= False, container=False, show_fullscreen_button=False)
+                with gr.Row(elem_classes="white-box", visible=True, min_height="34vw" ):
                     gr.Markdown("## Here are your tips:", elem_classes="heading"),
                     up_image = gr.Image(value="./hint_pics/hint_3.jpg", elem_classes="fixed-image-up", show_label= False, show_download_button= False, visible=False)
                     mid_image = gr.Image(value="./hint_pics/hint_6.jpg", elem_classes="fixed-image-mid", show_label= False, show_download_button= False, visible=False)
