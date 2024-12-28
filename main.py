@@ -26,6 +26,8 @@ template = (
 
 qa_template = {"template": template}
 
+
+
 def update_persuasion(is_believed):
     global persuasion_level
     if is_believed:

@@ -170,3 +170,6 @@ footer {
     max-width: 100%; /* Expand the container width */
 
 }
+
+.message.user {
+    background: #e8e8e8 !important; }
