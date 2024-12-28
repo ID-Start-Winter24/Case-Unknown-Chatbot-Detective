@@ -130,9 +130,25 @@ footer {
     border-radius: 0px !important;
 }
 
-.timer{
+
+.timer p {
+    font-family: 'Jersey 20', monospace !important; /* Ensure font family is applied */
+    font-size: 20px !important; /* Ensure font size is applied */
+    color: #ffffff !important; /* Ensure color is applied */
+    text-align: center !important;
     border-radius: 0px !important;
+    font-weight: bold;
 }
+.persuasion_display p {
+    font-family: 'Jersey 20', monospace !important; /* Ensure font family is applied */
+    font-size: 20px !important; /* Ensure font size is applied */
+    color: #222222 !important; /* Ensure color is applied */
+    text-align: center !important;
+    border-radius: 0px !important;
+    font-weight: bold;
+}
+
+
 .logo{
     width: 110% !important; /* Set the desired width */
     height: 110%; /* Maintain aspect ratio */
@@ -151,4 +167,6 @@ footer {
 
 .gradio-container {
     background-size: cover !important; /* Ensures background covers the new width */
+    max-width: 100%; /* Expand the container width */
+
 }
