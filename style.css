@@ -142,3 +142,13 @@ footer {
 .logo-box{
     height: "6vw"
 }
+
+.ending-black {
+    background-color: rgb(0, 0, 0);
+    height: "36vw";
+    border-radius: 0px !important;
+}
+
+.gradio-container {
+    background-size: cover !important; /* Ensures background covers the new width */
+}

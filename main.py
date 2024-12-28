@@ -159,7 +159,7 @@ def main():
 
     with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme, fill_height=True) as chatinterface:
         with gr.Row(equal_height=True):  # Equal_width argument
-            with gr.Column(): # First column for hints
+            with gr.Column(scale=2): # First column for hints
                 with gr.Row(elem_classes="logo-box", visible=True, max_height="6.5vw"):
                     logo = gr.Image(value="./avatar_images/logo.png", elem_classes="logo", show_label= False, show_download_button= False, container=False, show_fullscreen_button=False)
                 with gr.Row(elem_classes="white-box", visible=True, min_height="34vw" ):
@@ -168,7 +168,7 @@ def main():
                     mid_image = gr.Image(value="./hint_pics/hint_6.jpg", elem_classes="fixed-image-mid", show_label= False, show_download_button= False, visible=False)
                     down_image = gr.Image(value="./hint_pics/hint_7.jpg", elem_classes="fixed-image-down", show_label= False, show_download_button= False, visible=False)
                    
-            with gr.Column():  # Second column for picture of detectiv, timer and scale
+            with gr.Column(scale=3):  # Second column for picture of detectiv, timer and scale
                 timer = gr.Textbox(
 
                     lines=1, 
@@ -187,7 +187,7 @@ def main():
                     container=False,
                     )
 
-            with gr.Column():  # Third column for chatbot and input box
+            with gr.Column(scale=2):  # Third column for chatbot and input box
                 chatbot = gr.Chatbot(
                     value=[{"role": "assistant", "content": "Well, well... look who decided to wake up."}],
                     type="messages",
