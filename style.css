@@ -173,3 +173,26 @@ footer {
 
 .message.user {
     background: #e8e8e8 !important; }
+
+    /* The overlay style */
+#game_over_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);  /* 70% black transparency */
+    display: block;  /* Initially visible for testing */
+    z-index: 1000;
+}
+
+/* The text inside the overlay */
+#game_over_message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+}

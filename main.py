@@ -9,7 +9,7 @@ import Blackwell
 
 client = OpenAI()
 
-message_counter = 10
+message_counter = 2
 persuasion_level = 5  # Start persuasion scale in the middle (0 to 10)
 path_modulhandbuch = "./dokumente"
 path_persist = os.path.join(path_modulhandbuch, "persist")
@@ -100,6 +100,11 @@ def user(message, history):
         message_counter -= 1
         return "", history + [{"role": "user", "content": message}], f"{message_counter} messages left"
     else:
+        game_over_overlay = gr.HTML("""
+        <div id='game_over_overlay'>
+            <div id='game_over_message'>Game Over</div>
+        </div>
+        """, visible=True)
         return "", history + [{"role": "user", "content": message}], f"game over"
 
         
@@ -134,7 +139,8 @@ def change_detective_picture(history):
         detective_image = "avatar_images/Detective_animated.gif"
     return detective_image
 
-    
+def show_ending():
+    pass
 
 def main():
     with open("./avatar_images/background_b2_wide.jpg", "rb") as image_file:
@@ -160,6 +166,11 @@ def main():
 
 
     with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme, fill_height=True) as chatinterface:
+        #game_over_overlay = gr.HTML("""
+        #<div id='game_over_overlay'>
+        #    <div id='game_over_message'>Game Over</div>
+        #</div>
+        #""", visible=False)  # Set visible=True for testing
         with gr.Row(equal_height=True):  # Equal_width argument
             with gr.Column(scale=2): # First column for hints
                 with gr.Row(elem_classes="logo-box", visible=True, max_height="6.5vw"):
