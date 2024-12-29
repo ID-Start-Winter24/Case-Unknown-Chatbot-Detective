@@ -97,16 +97,19 @@ def response(history):
 def user(message, history):
     global message_counter
     global game_over_overlay
-    if message_counter > 1:
+    game_over_overlay = gr.HTML("""
+        <div id='game_over_overlay'>
+            <div id='game_over_box'>
+                <div id='game_over_message'>Game Over</div>
+                <button id='start_again_button'>Start Again</button>
+            </div>
+        </div>
+        """, visible=True)
+    if message_counter > 0:
         message_counter -= 1
         return "", history + [{"role": "user", "content": message}], f"{message_counter} messages left"
     else:
-        game_over_overlay = gr.HTML("""
-        <div id='game_over_overlay'>
-            <div id='game_over_message'>Game Over</div>
-        </div>
-        """, visible=True)
-        return "", history + [{"role": "user", "content": message}],  game_over_overlay 
+        return "", history + [{"role": "user", "content": message}], game_over_overlay 
 
         
 is_visible_up = None
@@ -167,11 +170,7 @@ def main():
 
 
     with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme, fill_height=True) as chatinterface:
-        game_over_overlay = gr.HTML("""
-        <div id='game_over_overlay'>
-            <div id='game_over_message'>Game Over</div>
-        </div>
-        """, visible=False)  # Set visible=True for testing
+
         with gr.Row(equal_height=True):  # Equal_width argument
             with gr.Column(scale=2): # First column for hints
                 with gr.Row(elem_classes="logo-box", visible=True, max_height="6.5vw"):

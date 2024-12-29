@@ -181,18 +181,40 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);  /* 70% black transparency */
-    display: block;  /* Initially visible for testing */
-    z-index: 1000;
+    background: rgba(0, 0, 0, 0.7); /* 70% transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure the overlay is on top of other content */
+    visibility: visible; /* Make it visible for testing */
 }
 
-/* The text inside the overlay */
+#game_over_box {
+    background-color: white; /* White background for the box */
+    padding: 30px; /* Space around the text */
+    border-radius: 0px; /* Rounded corners for the box */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: shadow to make the box stand out */
+}
+
 #game_over_message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 32px;
-    color: white;
+    font-size: 24px;
     font-weight: bold;
+    color: black; /* Text color */
+    text-align: center;
+}
+
+#start_again_button {
+    margin-top: 20px; /* Add space between the message and button */
+    padding: 10px 20px;
+    background-color: #8a8a8a; /* Button background color */
+    color: white; /* Text color */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#start_again_button:hover {
+    background-color: #606060; /* Darker blue on hover */
 }
