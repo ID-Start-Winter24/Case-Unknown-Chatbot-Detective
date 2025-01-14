@@ -9,7 +9,7 @@ import Blackwell
 
 client = OpenAI()
 
-message_counter = 2
+message_counter = 10
 persuasion_level = 5  # Start persuasion scale in the middle (0 to 10)
 path_modulhandbuch = "./dokumente"
 path_persist = os.path.join(path_modulhandbuch, "persist")
@@ -64,22 +64,22 @@ def response(history):
     chat_history = []
     for i, msg in enumerate(history):
         if i % 2 == 0:
-            history_message = {"role": "assistant", "content": msg["content"]}
-        else:
             history_message = {"role": "user", "content": msg["content"]}
+        else:
+            history_message = {"role": "assistant", "content": msg["content"]}
         chat_history.append(history_message)
         
     # Streaming der Antwort mit der Chat-Engine
-    message = history[-1]["content"]
+    #message = history[-1]["content"]
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         stream=True,
         messages=[
         
             {   "role": "system", 
-                "content": Blackwell.SystemPrompt},
-            {   "role": "user",
-                "content": message}
+                "content": Blackwell.SystemPrompt}, *chat_history
+#            {   "role": "user",
+#                "content": message}
         ]
    
         )
@@ -96,20 +96,11 @@ def response(history):
 
 def user(message, history):
     global message_counter
-    global game_over_overlay
-    game_over_overlay = gr.HTML("""
-        <div id='game_over_overlay'>
-            <div id='game_over_box'>
-                <div id='game_over_message'>Game Over</div>
-                <button id='start_again_button'>Start Again</button>
-            </div>
-        </div>
-        """, visible=True)
     if message_counter > 0:
         message_counter -= 1
         return "", history + [{"role": "user", "content": message}], f"{message_counter} messages left"
     else:
-        return "", history + [{"role": "user", "content": message}], game_over_overlay 
+        return "", history + [{"role": "user", "content": message}], f"game over"
 
         
 is_visible_up = None
@@ -143,8 +134,7 @@ def change_detective_picture(history):
         detective_image = "avatar_images/Detective_animated.gif"
     return detective_image
 
-def show_ending():
-    pass
+    
 
 def main():
     with open("./avatar_images/background_b2_wide.jpg", "rb") as image_file:
@@ -170,7 +160,6 @@ def main():
 
 
     with gr.Blocks(css=custom_css, css_paths="./style.css", theme=theme, fill_height=True) as chatinterface:
-
         with gr.Row(equal_height=True):  # Equal_width argument
             with gr.Column(scale=2): # First column for hints
                 with gr.Row(elem_classes="logo-box", visible=True, max_height="6.5vw"):
