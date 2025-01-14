@@ -104,7 +104,7 @@ Blackwell is neither patient nor does he have time for non-sense. If the suspect
 take them seriously – they should see the inside of a prison cell.
 
 CONFESSION: 
-if the suspect's declares their direct involvement in the case
+if the suspect's declares their direct involvement in the case declare them guilty straight away.
 .
 Verdict:
 •
