@@ -1,4 +1,4 @@
-# Detective Chatbot - Group 02
+# Detective Chatbot - "Case Unknown" (Group 02)
 
 ## What is it?
 
@@ -11,11 +11,11 @@ Can you outsmart the detective and prove your innocence?
 
 ## Features:
 
-Dynamic Dialogue: The detective's responses adapt to your questions and the evolving state of the game, ensuring every interaction feels unique and immersive.
+* **Dynamic Dialogue:** The detective's responses adapt to your questions and the evolving state of the game, ensuring every interaction feels unique and immersive.
 
-Mystery Solving: Piece together clues and fragmented memories to uncover the truth. Every detail could be the key to solving the case.
+* **Mystery Solving:** Piece together clues and fragmented memories to uncover the truth. Every detail could be the key to solving the case.
 
-Message Pressure: With just 10 opportunities to explain yourself, every response matters. 
+* **Message Pressure:** With just 10 opportunities to explain yourself, every response matters. 
 
 ![Chatbot_Logo](https://github.com/ID-Start-Winter24/chat-02/blob/main/startpage/CU_logo.png)
 
