@@ -2,16 +2,23 @@
 
 ## What is it?
 
-This is a text-based detective game where you, the player, are accused of a crime. Your goal is to clear your name by answering the questions of a detective chatbot. Not remembering what really happened last night your goal is to clear your name by coming up with a story of events of last night that checks out and is believable based on provided memory fragments - whilst the detective's objective is to judge wether your story is believable and decide on whether he'll send you to jail.
+This is a text-based detective chatbot game where you chat with an AI detective who evaluates your responses, tracks your story, and decides your fate.
+
+You’re accused of a crime you can’t remember. Your goal? Clear your name by answering the detective’s questions. 
+Use memory fragments to weave a believable story about last night. Convince the detective, or risk being sent to jail.
+
+Can you outsmart the detective and prove your innocence?
 
 ## Features:
 
-Dynamic dialogue: The detective's responses will vary based on your questions and the current state of the game.
+Dynamic Dialogue: The detective's responses adapt to your questions and the evolving state of the game, ensuring every interaction feels unique and immersive.
 
-Mystery solving: The Player uses clues and memory fragements to piece together the story.
+Mystery Solving: Piece together clues and fragmented memories to uncover the truth. Every detail could be the key to solving the case.
 
-Time pressure: A 15-Minute Timer adds urgency to the gameplay.
+Message Pressure: With just 10 opportunities to explain yourself, every response matters. 
+
+![Chatbot_Logo](https://github.com/ID-Start-Winter24/chat-02/blob/main/startpage/CU_logo.png)
 
 ## Technologies used:
 
-Python, Visual Studio Code, Gradio, Llama-index, OpenAI API 
+Python, Visual Studio Code, Gradio, OpenAI API 
