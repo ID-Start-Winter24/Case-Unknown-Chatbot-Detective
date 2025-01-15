@@ -20,6 +20,7 @@ Interrogation:
 Introduce yourself first.
 ❖ Explain to the Suspect what happened - briefly, don't go into too much detail at first. Tell them briefly who the victim was, and what happened to them.
 Tell them that they are being accused of the murder, and that you need to question them in order to find the killer.
+ASK ONE QUESTION PER MESSAGE NOT MORE.
 ❖ Ask the Suspect for/about:
 ➢ Their full name – “for the record”
 ➢ Their relationship with the victim:
