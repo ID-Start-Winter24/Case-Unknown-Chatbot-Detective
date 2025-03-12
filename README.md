@@ -11,7 +11,7 @@ This repository contains the code for "Case Unknown," a detective chatbot game d
 >
 > Can you outsmart the detective and prove your innocence?
 
-![Screenshot landing page](https://github.com/ID-Start-Winter24/Case-Unknown-Chatbot-Detective/blob/main/avatar_images/Screenshot_landingpage.png)
+![Screenshot landing page](avatar_images/screenshot_landing.png)
 
 *A screenshot of the Case Unknown landing page.*
 
@@ -27,7 +27,7 @@ This repository contains the code for "Case Unknown," a detective chatbot game d
 
 * **Deployment on Hugging Face Spaces:** The chatbot was initially deployed on Hugging Face Spaces for user testing and accessibility.
 
-![Screenshot landing page](avatar_images/Screenshot_gameplay.png)
+![Screenshot landing page](avatar_images/screenshot_game.png)
 
 *A screenshot of the Case Unknown chatbot interface.*
 
